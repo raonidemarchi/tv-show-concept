@@ -1,0 +1,357 @@
+@import '../../styles/mixins';
+
+$page-padding-y: 46px;
+$page-padding-x: 6%;
+$content-height: calc(100vh - 260px);
+$content-min-height: 520px;
+$episode-container-margin: 52px;
+$season-container-height: 84.2px;
+
+.content {
+  position: relative;
+  height: $content-height;
+  min-height: $content-min-height;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position-x: center;
+  box-shadow: inset -100px 160px 1000px 0px rgba(0, 0, 0, .6),
+              inset -600px 0 1000px rgba(0, 0, 0, .5),
+              inset -400px 0px 1000px 0 rgba(0, 0, 0, .6);
+
+  @include small {
+    height: auto;
+    box-shadow: none;
+    background-image: none !important;
+  }
+
+  .closeIcon {
+    position: absolute;
+    right: $page-padding-x / 2;
+    top: $page-padding-y;
+    cursor: pointer;
+
+    img {
+      vertical-align: middle;
+    }
+
+    @include small {
+      top: 12px;
+    }
+  }
+
+  .mobileBackground {
+    position: relative;
+    display: none;
+
+    @include small {
+      display: block;
+    }
+
+    img {
+      width: 100%;
+      display: block;
+    }
+
+    .shadow {
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      position: absolute;
+      box-shadow: inset 0 -36px 20px -16px #111,
+                  inset 0 52px 60px -24px #111;
+    }
+  }
+}
+
+.displayFlex {
+  display: flex;
+}
+
+.contentContainer {
+  padding: $page-padding-y $page-padding-x 0;
+  margin: 0 auto;
+
+  @include small {
+    padding-top: 0;
+    padding-right: $page-padding-x / 2;
+    padding-left: $page-padding-x / 2;
+  }
+
+  .flexContainer {
+    display: flex;
+
+    @include small {
+      display: block;
+    }
+  }
+
+  .titleContainer {
+    width: 100%;
+    padding-right: 40px;
+
+    @include small {
+      padding-right: 0;
+    }
+
+    .title {
+      font-size: 64px;
+      font-weight: bold;
+      letter-spacing: 2px;
+      line-height: 1;
+
+      @include small {
+        font-size: 28px;
+      }
+    }
+    
+    p {
+      margin: 4px 2px;
+      font-size: 18px;
+      color: #d4d4d4;
+
+      @include small {
+        font-size: 12px;
+      }
+    }
+  }
+
+  .episodesContainer {
+    max-width: 470px;
+    min-width: 470px;
+    margin-top: $episode-container-margin;
+    color: #d8d8d8;
+
+    @include small {
+      margin-top: 0;
+      min-width: auto;
+    }
+
+    .seasonsContainer {
+      display: flex;
+      border-bottom: 1px solid rgba(255, 255, 255, .27);
+      letter-spacing: 2px;
+  
+      span {
+        font-size: 20px;
+        padding: 28px 12px;
+        margin-right: 28px;
+        cursor: pointer;
+        user-select: none;
+        color: #848484;
+        
+        &.active {
+          border-bottom: 3px solid #43a047;
+          margin-bottom: -2px;
+          color: #d8d8d8;
+        }
+
+        &:last-child {
+          margin-right: 0;
+        }
+      }
+    }
+
+    .episodesList {
+      overflow-y: auto;
+      max-height: calc(#{$content-height} - #{$page-padding-y} - #{$episode-container-margin} - #{$season-container-height});
+      min-height: calc(#{$content-min-height} - #{$page-padding-y} - #{$episode-container-margin} - #{$season-container-height});
+
+      @include small {
+        max-height: none;
+        min-height: auto;
+      }
+    }
+    
+    .episode {
+      border-bottom: 1px solid rgba(255, 255, 255, .13);
+
+      &:last-child {
+        border-bottom: none;
+      }
+
+      .episodeContainer {
+        width: 100%;
+        display: flex;
+
+        .title {
+          width: 100%;
+          padding: 18px 12px;
+          white-space: nowrap;
+          overflow-x: hidden;
+          text-overflow: ellipsis;
+          cursor: pointer;
+          letter-spacing: 2px;
+          user-select: none;
+        }
+
+        .playIconContainer {
+          padding: 9px 12px;
+          line-height: 0;
+          cursor: pointer;
+
+          &:hover {
+            .playIcon {
+              background-color: rgba(255, 255, 255, .13);
+            }
+          }
+
+          .playIcon {
+            border-radius: 50%;
+            transition: background-color .1s;
+          }
+        }
+      }
+
+      .episodeDetails {
+        padding: 0 64px 18px 12px;
+        overflow-y: hidden;
+        transition: max-height .2s, padding-bottom .2s;
+        
+        &.hidden {
+          max-height: 0;
+          padding-bottom: 0;
+        }
+
+        img {
+          width: 100%;
+        }
+      }
+    }
+  }
+}
+
+.footer {
+  position: relative;
+  color: #d8d8d8;
+  background-image: linear-gradient(to right, #212121, #010101);
+  box-shadow: 0 -30px 100px 0 rgba(0, 0, 0, .6);
+
+  @include small {
+    background-image: none;
+    box-shadow: none;
+  }
+  
+  .footerContainer {
+    padding: $page-padding-y $page-padding-x;
+    margin: 0 auto;
+
+    @include small {
+      padding-right: $page-padding-x / 2;
+      padding-left: $page-padding-x / 2;
+    }
+  }
+
+  .sectionsContainer {
+    display: flex;
+    border-bottom: 1px solid rgba(255, 255, 255, .27);
+    line-height: 2;
+    
+    span {
+      display: flex;
+      font-size: 20px;
+      margin-right: 100px;
+      font-weight: bold;
+      letter-spacing: 4px;
+      white-space: nowrap;
+      padding-bottom: 4px;
+      cursor: pointer;
+      user-select: none;
+      color: #848484;
+  
+      &.active {
+        border-bottom: 3px solid #43a047;
+        margin-bottom: -2px;
+        color: #d8d8d8;
+      }
+
+      &:last-child {
+        margin-right: 0;
+      }
+
+      @include small {
+        margin-right: 30px;
+        font-size: 14px;
+        letter-spacing: 2px;
+        white-space: normal;
+      }
+    }
+
+    .telecineIconContainer {
+      padding-bottom: 4px;
+      text-align: right;
+      width: 100%;
+
+      @include small {
+        display: none;
+      }
+    }
+  }
+
+  .footerGeneralContainer {
+    display: flex;
+
+    &.displayNone {
+      display: none;
+    }
+
+    @include small {
+      flex-flow: row wrap;
+      align-content: space-between;
+      justify-content: space-between;
+    }
+
+    .footerActionContainer {
+      color: #9B9B9B;
+      padding-top: 38px;
+      text-align: center;
+      margin-right: 14px;
+      min-width: 98px;
+  
+      p {
+        margin-top: 4px;
+      }
+    }
+  
+    .synopsis {
+      padding-top: 24px;
+      margin-left: 30px;
+  
+      @include small {
+        margin-left: 0;
+      }
+  
+      .title {
+        font-size: 18px;
+        letter-spacing: 2px;
+        margin-bottom: 4px;
+      }
+    }
+  }
+
+  .footerCastContainer {
+    display: flex;
+    padding-top: 38px;
+    overflow-x: auto;
+    white-space: nowrap;
+
+    &.displayNone {
+      display: none;
+    }
+
+    .castBoard {
+      background-color: #3b3b3b;
+      border-radius: 3px;
+      margin-right: 10px;
+      padding: 30px 20px;
+      min-width: 140px;
+      max-width: 140px;
+      text-align: center;
+      box-shadow: 0 .125rem .25rem rgba(0, 0, 0, .075);
+    }
+
+    @include small {
+      padding-bottom: 10px;
+    }
+  }
+}
